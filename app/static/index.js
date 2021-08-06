@@ -6,15 +6,15 @@ function savePlate() {
         statusCode: {
            200: function (response) {
             console.log("Response: " + response);
-            $("#savePlateResponse").text('Response code: 200').addClass('text-success');
+            $("#savePlateResponse").text('Response code: 200').removeClass().addClass('text-success');
            },
            400: function (response) {
             console.log("Response: " + response);
-            $("#savePlateResponse").text('Response code: 400').addClass('text-danger');
+            $("#savePlateResponse").text('Response code: 400').removeClass().addClass('text-danger');
            },
            422: function (response) {
             console.log("Response: " + response);
-            $("#savePlateResponse").text('Response code: 422').addClass('text-danger');
+            $("#savePlateResponse").text('Response code: 422').removeClass().addClass('text-danger');
            }
         }
     });

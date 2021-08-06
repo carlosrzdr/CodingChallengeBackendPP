@@ -9,12 +9,12 @@
             <div class="card text-center">
             <div class="card-body">
                 <h5 class="card-title">Insert plate</h5>
-                <form>
+                <form onsubmit="savePlate();return false">
                     <label for="plate">Plate number:</label>
-                    <input name='plate' class="form-control form-control-lg" type="text" id="plate">
+                    <input name="plate" class="form-control form-control-lg" type="text" id="plate">
+                    <input type="submit" value="Save" class="mx-1 btn btn-info btn-lg mt-3">
                 </form>
-                <a class="m-3 btn btn-info btn-lg" onclick="savePlate();">Save</a>
-                <p id="savePlateResponse"></p>
+                <b><p id="savePlateResponse"></p></b>
             </div>
             </div>
         </div>
