@@ -1,15 +1,17 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
-def create_app():
-    app = Flask(__name__, instance_relative_config=True)
-    app.config.from_mapping(TESTING=False,
-                            DEBUG=True,
-                            SECRET_KEY='secret_key',
-                            SERVER='0.0.0.0')
-    return app
+db = SQLAlchemy()
 
-app = create_app()
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///plates.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-database = SQLAlchemy(app)
+def create_app(testing=False):
+    app = Flask(__name__, instance_relative_config=True)
+    if testing:
+        app.config.from_object('config.Config')
+    else:
+        app.config.from_object('config.ConfigTesting')
+
+    db.init_app(app)
+
+    with app.app_context():
+        db.create_all()
+        return app

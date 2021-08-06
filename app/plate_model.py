@@ -1,27 +1,30 @@
-from app import database
+from app import db
 import datetime
 
-class Plate(database.Model):
+class Plate(db.Model):
+
+    __tablename__ = 'plates'
     
-    id = database.Column(database.Integer, primary_key=True)
-    plate = database.Column(database.String(10), nullable=False)
-    timestamp = database.Column(database.DateTime, default=datetime.datetime.now())
+    id = db.Column(
+        db.Integer, 
+        primary_key=True
+    )
+    plate = db.Column(
+        db.String(10), 
+        nullable=False
+    )
+    timestamp = db.Column(
+        db.DateTime, 
+        default=datetime.datetime.now()
+    )
 
     def __init__(self, plate):
         self.plate = plate
 
-def create_plate(plate_number):
+    def save(plate_number):
 
-    plate = Plate(plate_number)
-    database.session.add(plate)
-    database.session.commit()
+        plate = Plate(plate_number)
+        db.session.add(plate)
+        db.session.commit()
 
-    return plate
-
-
-if __name__ == "__main__":
-
-    # Run this file directly to create the database tables.
-    print("Creating database tables...")
-    database.create_all()
-    print("Done!")
+        return plate
