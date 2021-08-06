@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}Plate{% endblock %}
+
+{% block plate %}
+<div class="row d-flex align-items-stretch mt-5"></div>
+    <div class="row">
+        <div class="col p-5">
+            <div class="card text-center">
+            <div class="card-body">
+                <h5 class="card-title">Insert plate</h5>
+                <form>
+                    <label for="plate">Plate number:</label>
+                    <input name='plate' class="form-control form-control-lg" type="text" id="plate">
+                </form>
+                <a class="m-3 btn btn-info btn-lg" onclick="savePlate();">Save</a>
+                <p id="savePlateResponse"></p>
+            </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col p-5">
+            <div class="card text-center">
+            <div class="card-body">
+                <h5 class="card-title">Plates list</h5>
+                <a class="mx-1 btn btn-info btn-lg" onclick="retrievePlates();">Retrieve</a>
+                <p id="retrievePlatesResponse"></p>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

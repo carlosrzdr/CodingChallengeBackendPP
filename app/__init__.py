@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from app.views import view
 
 db = SQLAlchemy()
 
@@ -14,4 +15,5 @@ def create_app(testing=False):
 
     with app.app_context():
         db.create_all()
+        app.register_blueprint(view)
         return app
