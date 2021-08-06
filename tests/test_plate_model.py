@@ -1,4 +1,4 @@
-from app.plate_model import Plate
+from app.models import Plate
 
 def test_plate_entry_created(session):
     plate = Plate(plate='a-plate')
