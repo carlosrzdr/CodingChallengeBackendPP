@@ -1,5 +1,19 @@
-import pytest
-from app import create_app
-from sqlalchemy import create_engine
-from sqlalchemy.orm.session import Session
+from app.plate_model import Plate
 
+def test_plate_entry_created(session):
+    plate = Plate(plate='a-plate')
+
+    session.add(plate)
+    session.commit()
+
+    assert plate.id > 0
+
+def test_plate_found(session):
+    plate = Plate(plate='a-plate')
+
+    session.add(plate)
+    session.commit()
+
+    found_plate = Plate.query.filter_by(plate=plate.plate).first()
+
+    assert found_plate == plate
