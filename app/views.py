@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request, jsonify
 import json
 from app.plate import plateIsValid
+from app.models import Plate
 
 # Constants
 SUCCESS_200 = json.dumps({'success':True}), 200, {'ContentType':'application/json'}
@@ -27,7 +28,10 @@ def plate():
         except:
             return ERROR_400
 
-        if plateIsValid(plate_number.upper()) is not None:
+        plate_number = plate_number.upper()
+        if plateIsValid(plate_number) is not None:
+            plate = Plate(plate_number=plate_number)
+            plate.save()
             return SUCCESS_200
         else:
             return ERROR_422

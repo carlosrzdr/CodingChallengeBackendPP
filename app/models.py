@@ -1,4 +1,5 @@
 from app import db
+from flask_sqlalchemy import SQLAlchemy
 import datetime
 
 class Plate(db.Model):
@@ -15,16 +16,13 @@ class Plate(db.Model):
     )
     timestamp = db.Column(
         db.DateTime, 
-        default=datetime.datetime.now()
+        default=datetime.datetime.now(),
+        nullable=False
     )
 
-    def __init__(self, plate):
-        self.plate = plate
+    def __init__(self, plate_number):
+        self.plate = plate_number
 
-    def save(plate_number):
-
-        plate = Plate(plate_number)
-        db.session.add(plate)
+    def save(self):
+        db.session.add(self)
         db.session.commit()
-
-        return plate

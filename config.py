@@ -9,7 +9,7 @@ class Config:
     SECRET_KEY = os.getenv('SECRET_KEY')
     SERVER = os.getenv('SERVER')
     PORT = os.getenv('PORT')
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///plates.db'
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///plates'
     SQLALCHEMY_TRACK_MODIFICATIONS = os.getenv('SQLALCHEMY_TRACK_MODIFICATIONS')
 
 class ConfigTesting(Config):
