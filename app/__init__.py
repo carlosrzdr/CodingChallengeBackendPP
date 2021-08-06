@@ -1,10 +1,17 @@
 from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
 
-def create_app():
+db = SQLAlchemy()
+
+def create_app(testing=False):
     app = Flask(__name__, instance_relative_config=True)
-    app.config.from_mapping(TESTING=False,
-                            DEBUG=True,
-                            SECRET_KEY='secret_key',
-                            SERVER='0.0.0.0')
+    if testing:
+        app.config.from_object('config.ConfigTesting')
+    else:
+        app.config.from_object('config.Config')
 
-    return app
+    db.init_app(app)
+
+    with app.app_context():
+        db.create_all()
+        return app
