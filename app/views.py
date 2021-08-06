@@ -1,5 +1,11 @@
 from flask import Blueprint, render_template, request, jsonify
 import json
+from app.plate import plateIsValid
+
+# Constants
+SUCCESS_200 = json.dumps({'success':True}), 200, {'ContentType':'application/json'}
+ERROR_400 = json.dumps({'success':False}), 400, {'ContentType':'application/json'}
+ERROR_422 = json.dumps({'success':False}), 422, {'ContentType':'application/json'}
 
 view = Blueprint("views", __name__)
 
@@ -16,7 +22,14 @@ def plate():
     inserts a new plate into database and retrieves all plates
     """
     if request.method == 'POST':
-        plate_number = request.form['plate']
-        return json.dumps({'success':False}), 400, {'ContentType':'application/json'}
+        try:
+            plate_number = request.form['plate']
+        except:
+            return ERROR_400
+
+        if plateIsValid(plate_number.upper()) is not None:
+            return SUCCESS_200
+        else:
+            return ERROR_422
 
     return render_template("plate.html")
