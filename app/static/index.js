@@ -19,3 +19,9 @@ function savePlate() {
         }
     });
 }
+
+function retrievePlates() {
+    $.get( "/plate", function( data ) {
+        $("#retrievePlatesResponse").text(data);
+    });
+}
