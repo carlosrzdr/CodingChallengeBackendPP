@@ -22,6 +22,15 @@ function savePlate() {
 
 function retrievePlates() {
     $.get( "/plate", function( data ) {
-        $("#retrievePlatesResponse").text(data);
+        console.log(data)
+        var platesListData = '';
+        $.each(data, function(key, value) {
+            platesListData += "<tr>";
+            platesListData += '<td>'+value.id+'</td>';
+            platesListData += '<td>'+value.plate+'</td>';
+            platesListData += '<td>'+value.timestamp+'</td>';
+            platesListData += '</tr>';     
+        });
+        $('#platesList').html(platesListData);
     });
 }

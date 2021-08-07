@@ -20,14 +20,29 @@
         </div>
     </div>
     <div class="row">
-        <div class="col p-5">
+        <div class="col-md-6 p-5">
             <div class="card text-center">
             <div class="card-body">
                 <h5 class="card-title">Plates list</h5>
                 <a class="mx-1 btn btn-info btn-lg" onclick="retrievePlates();">Retrieve</a>
-                <p id="retrievePlatesResponse"></p>
             </div>
             </div>
+        </div>
+        <div class="col-md-6 p-5">
+            <div class="overflow-auto table-responsive" style="overflow-y: scroll; height:350px;">
+              <table class="table">
+                  <thead class='thead-dark' style="padding: 1rem;">
+                    <tr>
+                      <th style="width: 25%">ID</th>
+                      <th style="width: 35%">Plate</th>
+                      <th style="width: 40%">Timestamp</th>
+                    </tr>
+                  </thead>
+                  <tbody id="platesList">
+                  </tbody>
+                </table>
+            </div>
+          </div>
         </div>
     </div>
 </div>
