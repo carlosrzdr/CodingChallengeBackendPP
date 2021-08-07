@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, jsonify, abort
 import json
-from app.plate import get_plates, plate_is_valid, search_plate_levenshtein
+from app.actions.plate import get_plates, plate_is_valid, search_plate_levenshtein
 from app.models import Plate
 
 # Constants
