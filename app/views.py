@@ -17,6 +17,13 @@ def index():
     """
     return render_template("index.html")
 
+@view.route("/plates")
+def plates():
+    """
+    shows plates page
+    """
+    return render_template("plates.html")
+
 @view.route("/plate", methods=["POST", "GET"])
 def plate():
     """
@@ -36,4 +43,6 @@ def plate():
         else:
             return ERROR_422
 
-    return render_template("plate.html")
+    if request.method == 'GET':
+        return SUCCESS_200
+    
