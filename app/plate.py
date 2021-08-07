@@ -1,6 +1,6 @@
 from re import compile
 from app.models import Plate
-from enchant.utils import levenshtein
+import Levenshtein
 
 
 def plate_is_valid(plate_number):
@@ -34,7 +34,7 @@ def search_plate_levenshtein(plate_number, levenshtein_distance):
     plates = get_plates()
     result = []
     for entry in plates:
-        if levenshtein(plate_number, entry['plate']) <= levenshtein_distance:
+        if Levenshtein.distance(plate_number, entry['plate']) <= levenshtein_distance:
             result.append(entry)
     return result
 
