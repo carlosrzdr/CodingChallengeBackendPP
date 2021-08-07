@@ -12,6 +12,13 @@ def test_plate_get_request(session):
         response = test_client.get('/plate')
         assert eval(response.data) == [row2dict(expected_plate)]
 
+def test_plate_get_request_empty(session):
+    app = create_app(testing=True)
+
+    with app.test_client() as test_client:
+        response = test_client.get('/plate')
+        assert eval(response.data) == []
+
 def test_plate_post_request_success(session):
     app = create_app(testing=True)
 
