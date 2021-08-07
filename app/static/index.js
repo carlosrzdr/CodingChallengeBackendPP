@@ -34,3 +34,20 @@ function retrievePlates() {
         $('#platesList').html(platesListData);
     });
 }
+
+function searchPlate() {
+    var plate = document.getElementById('plate').value
+    var levenshtein = document.getElementById('levenshtein').value
+    $.get( "/search-plate?key="+plate+"&levenshtein="+levenshtein, function( data ) {
+        console.log(data)
+        var platesListData = '';
+        $.each(data, function(key, value) {
+            platesListData += "<tr>";
+            platesListData += '<td>'+value.id+'</td>';
+            platesListData += '<td>'+value.plate+'</td>';
+            platesListData += '<td>'+value.timestamp+'</td>';
+            platesListData += '</tr>';     
+        });
+        $('#platesList').html(platesListData);
+    });
+}
