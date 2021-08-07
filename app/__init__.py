@@ -13,8 +13,9 @@ def create_app(testing=None):
     db.init_app(app)
 
     with app.app_context():
-        from app.views import view # Import views here to avoid circular importing
+        from app import plate, search_plate # Import views here to avoid circular importing
         db.create_all()
-        app.register_blueprint(view)
+        app.register_blueprint(plate.bp)
+        app.register_blueprint(search_plate.bp)
 
         return app

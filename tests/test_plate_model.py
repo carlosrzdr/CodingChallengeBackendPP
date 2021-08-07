@@ -9,11 +9,11 @@ def test_plate_entry_created(session):
     assert plate.id > 0
 
 def test_plate_found(session):
-    plate = Plate(plate_number='plate-found')
+    expected_plate = Plate(plate_number='plate-found')
 
-    session.add(plate)
+    session.add(expected_plate)
     session.commit()
 
-    found_plate = Plate.query.filter_by(plate=plate.plate).first()
+    found_plate = Plate.query.filter_by(plate=expected_plate.plate).first()
 
-    assert found_plate == plate
+    assert found_plate == expected_plate
