@@ -38,16 +38,29 @@ function retrievePlates() {
 function searchPlate() {
     var plate = document.getElementById('plate').value
     var levenshtein = document.getElementById('levenshtein').value
-    $.get( "/search-plate?key="+plate+"&levenshtein="+levenshtein, function( data ) {
-        console.log(data)
-        var platesListData = '';
-        $.each(data, function(key, value) {
-            platesListData += "<tr>";
-            platesListData += '<td>'+value.id+'</td>';
-            platesListData += '<td>'+value.plate+'</td>';
-            platesListData += '<td>'+value.timestamp+'</td>';
-            platesListData += '</tr>';     
-        });
-        $('#platesList').html(platesListData);
+    $.ajax("/search-plate?key="+plate+"&levenshtein="+levenshtein, {
+        type: "GET",
+        statusCode: {
+           200: function (response) {
+            var platesListData = '';
+            $.each(response, function(key, value) {
+                platesListData += "<tr>";
+                platesListData += '<td>'+value.id+'</td>';
+                platesListData += '<td>'+value.plate+'</td>';
+                platesListData += '<td>'+value.timestamp+'</td>';
+                platesListData += '</tr>';     
+            });
+            $('#platesList').html(platesListData);
+            $("#searchPlateResponse").text('Response code: 200').removeClass().addClass('text-success');
+           },
+           400: function (response) {
+            console.log("Response: " + response);
+            $("#searchPlateResponse").text('Response code: 400').removeClass().addClass('text-danger');
+           },
+           422: function (response) {
+            console.log("Response: " + response);
+            $("#searchPlateResponse").text('Response code: 422').removeClass().addClass('text-danger');
+           }
+        }
     });
 }

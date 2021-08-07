@@ -14,13 +14,13 @@ class Plate(db.Model):
         nullable=False
     )
     timestamp = db.Column(
-        db.DateTime, 
-        default=datetime.datetime.now(),
+        db.DateTime,
         nullable=False
     )
 
     def __init__(self, plate_number):
         self.plate = plate_number
+        self.timestamp = datetime.datetime.now()
 
     def save(self):
         db.session.add(self)
