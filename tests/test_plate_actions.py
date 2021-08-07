@@ -1,4 +1,4 @@
-from app.plate import plate_is_valid, search_plate_levenshtein, row2dict, get_plates
+from app.actions.plate_actions import plate_is_valid, search_plate_levenshtein, row2dict, get_plates
 from app.models import Plate
 
 def test_plate_validation_correct():

@@ -23,9 +23,9 @@ def plate():
     :return: HTTP response codes if POST, a json containing plates data if GET
     """
     if request.method == 'POST':
-        plate_number = request.form['plate'].upper()
-        
-        if not plate_number:
+        try:
+            plate_number = request.form['plate'].upper()
+        except:
             abort(400)
 
         if plate_is_valid(plate_number) is not None:
