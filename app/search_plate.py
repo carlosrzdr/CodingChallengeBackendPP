@@ -26,4 +26,4 @@ def search_plate():
         abort(400)
 
     response = search_plate_levenshtein(key, levenshtein)
-    return jsonify({key: response})
+    return jsonify(response)
