@@ -17,13 +17,15 @@ def search_plate():
     :return: a json containing plates found with levenshtein distance equal or less than the specified
     """
     try:
-        key = request.args['key'].upper()
+        plate_number = request.args['key'].upper()
         levenshtein = int(request.args['levenshtein'])
     except:
         abort(400)
 
-    if plate_is_valid(key) is not None:
-        response = search_plate_levenshtein(key, levenshtein)
+    if plate_is_valid(plate_number) is not None:
+        response = search_plate_levenshtein(plate_number, levenshtein)
         return jsonify(response)
+    elif plate_number=='':
+        abort(400)
     else:
         abort(422)
