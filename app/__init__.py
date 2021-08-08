@@ -3,12 +3,12 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
-def create_app(testing=None):
+def create_app(testing=False):
     app = Flask(__name__)
     if testing:
-        app.config.from_object('config.Config')
-    else:
         app.config.from_object('config.ConfigTesting')
+    else:
+        app.config.from_object('config.Config')
 
     db.init_app(app)
 
