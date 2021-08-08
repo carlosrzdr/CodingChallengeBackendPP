@@ -17,7 +17,7 @@ cd CodingChallengeBackendPP
 
 ### Build container image 🔧
 
-_Execute the following command to build the image. The name given to the image is flask-app-container_
+_Execute the following command to build the image. The name given to the image is flask-app_
 
 ```
 docker image build -t flask-app .
@@ -26,7 +26,7 @@ docker image build -t flask-app .
 
 ## Deployment 🚀
 
-_To start the app start the docker container and bind the host's port to the port 5000 in flask-app_
+_To start the app start the docker container and bind the host's port to the port 5000 in flask-app-container_
 
 _In this example, the port binded from the host is 5001_
 
