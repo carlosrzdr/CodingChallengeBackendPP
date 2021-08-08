@@ -34,7 +34,7 @@ _In this example, the port binded from the host is 5001_
 docker run -p 5001:5000 -d peter-park-app
 ```
 
-_Now travel to http://localhost/:5001 to access the app_
+_Now travel to http://localhost:5001 to access the app_
 
 ### Execute tests ⚙️
 
