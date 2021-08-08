@@ -31,7 +31,7 @@ _To start the app start the docker container and bind the host's port to the por
 _In this example, the port binded from the host is 5001_
 
 ```
-docker run -p 5001:5000 -d flask-app --name flask-app-container
+docker run --name flask-app-container -p 5001:5000 -d flask-app
 ```
 
 _Now travel to http://localhost:5001 to access the app_
