@@ -13,5 +13,3 @@ def test_app_created():
     assert app.config['TESTING'] == Config.TESTING
     assert app.config['SQLALCHEMY_DATABASE_URI'] == Config.SQLALCHEMY_DATABASE_URI
     assert app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] == Config.SQLALCHEMY_TRACK_MODIFICATIONS
-    assert app.config['PORT'] == Config.PORT
-    assert app.config['SERVER'] == Config.SERVER
