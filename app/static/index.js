@@ -26,7 +26,6 @@ function retrievePlates() {
         var platesListData = '';
         $.each(data, function(key, value) {
             platesListData += "<tr>";
-            platesListData += '<td>'+value.id+'</td>';
             platesListData += '<td>'+value.plate+'</td>';
             platesListData += '<td>'+value.timestamp+'</td>';
             platesListData += '</tr>';     
@@ -45,7 +44,6 @@ function searchPlate() {
            200: function (response) {    
             $.each(response, function(key, value) {
                 platesListData += "<tr>";
-                platesListData += '<td>'+value.id+'</td>';
                 platesListData += '<td>'+value.plate+'</td>';
                 platesListData += '<td>'+value.timestamp+'</td>';
                 platesListData += '</tr>';     

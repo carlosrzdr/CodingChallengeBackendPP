@@ -4,20 +4,20 @@ from app.models import Plate
 def test_search_plate_get_request_success(session, app):
     with app.test_client() as test_client:
         expected_plate = Plate('M-PP123')
-        search_plate_number = 'MM-PP123'
+        search_key = 'MMPP123'
         session.add(expected_plate)
         session.commit()
-        response = test_client.get("/search-plate?key={}&levenshtein=1".format(search_plate_number))
-        assert eval(response.data) == [row2dict(expected_plate)]
+        response = test_client.get("/search-plate?key={}&levenshtein=1".format(search_key))
+        assert eval(response.data) == {search_key: [row2dict(expected_plate)]}
 
 def test_search_plate_get_request_success_empty(session, app):
     with app.test_client() as test_client:
         expected_plate = Plate('M-PP123')
-        search_plate_number = 'MM-PP1234'
+        search_key = 'MMPP1234'
         session.add(expected_plate)
         session.commit()
-        response = test_client.get("/search-plate?key={}&levenshtein=1".format(search_plate_number))
-        assert eval(response.data) == []
+        response = test_client.get("/search-plate?key={}&levenshtein=1".format(search_key))
+        assert eval(response.data) == {search_key: []}
 
 def test_search_plate_get_request_malformed_request(app):
     with app.test_client() as test_client:
@@ -27,11 +27,6 @@ def test_search_plate_get_request_malformed_request(app):
         assert all_fields_empty_response.status_code == 400
         assert key_field_empty_response.status_code == 400
         assert levenshtein_field_empty_response.status_code == 400
-
-def test_search_plate_get_request_malformed_plate(app):
-    with app.test_client() as test_client:
-        response = test_client.get("/search-plate?key=ABC123&levenshtein=1")
-        assert response.status_code == 422
 
 def test_search_page_found(app):
     with app.test_client() as test_client:
