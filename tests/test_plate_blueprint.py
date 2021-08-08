@@ -29,8 +29,10 @@ def test_plate_post_request_not_valid_plate(app):
 
 def test_plate_post_request_malformed_json(app):
     with app.test_client() as test_client:
-        response = test_client.post('/plate', data = {})
-        assert response.status_code == 400
+        response_empty_plate = test_client.post('/plate', data = {'plate':''})
+        response_empty_json = test_client.post('/plate', data = {})
+        assert response_empty_plate.status_code == 400
+        assert response_empty_json.status_code == 400
 
 def test_plates_page_found(app):
     with app.test_client() as test_client:
