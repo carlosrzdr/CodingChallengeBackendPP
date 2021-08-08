@@ -1,5 +1,4 @@
 from app.actions.plate_actions import row2dict
-from app import create_app
 from app.models import Plate
 
 def test_plate_get_request(session, app):
