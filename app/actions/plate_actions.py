@@ -24,17 +24,18 @@ def get_plates():
         result.append(row2dict(plate))
     return result
 
-def search_plate_levenshtein(plate_number, levenshtein_distance):
+def search_plate_levenshtein(search_key, levenshtein_distance):
     """
-    search plates with a levenshtein distance equal or less to the specified plate number
-    :param plate_number: str
+    search plates with a levenshtein distance equal or less to the specified search key
+    :param search_key: str
     :param levenshtein_distance: int
     :return: list
     """
     plates = get_plates()
+    search_key = search_key.replace('-','')
     result = []
     for entry in plates:
-        if Levenshtein.distance(plate_number, entry['plate']) <= levenshtein_distance:
+        if Levenshtein.distance(search_key, entry['plate'].replace('-','')) <= levenshtein_distance:
             result.append(entry)
     return result
 
