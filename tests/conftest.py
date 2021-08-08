@@ -3,9 +3,10 @@ from app import create_app, db as _db
 
 @pytest.fixture(scope='session')
 def app(request):
+    """
+    Creates an app for the tests
+    """
     app = create_app(testing=True)
-
-    # Establish an application context before running the tests.
     ctx = app.app_context()
     ctx.push()
 
@@ -18,11 +19,14 @@ def app(request):
 
 @pytest.fixture(scope='session')
 def db(app, request):
+    """
+    Creates the db scheme for the tests
+    """
+    _db.app = app
+    _db.create_all()
 
     def teardown():
         _db.drop_all()
-    _db.app = app
-    _db.create_all()
 
     request.addfinalizer(teardown)
     return _db
@@ -30,7 +34,9 @@ def db(app, request):
 
 @pytest.fixture(scope='function')
 def session(db, request):
-    """Creates a new database session for a test."""
+    """
+    Creates a new database session for each test
+    """
     connection = db.engine.connect()
     transaction = connection.begin()
 
