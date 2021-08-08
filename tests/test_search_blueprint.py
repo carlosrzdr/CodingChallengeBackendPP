@@ -8,7 +8,7 @@ def test_search_plate_get_request_success(session, app):
         session.add(expected_plate)
         session.commit()
         response = test_client.get("/search-plate?key={}&levenshtein=1".format(search_key))
-        assert eval(response.data) == {search_key: [row2dict(expected_plate)]}
+        assert eval(response.data) == [row2dict(expected_plate)]
 
 def test_search_plate_get_request_success_empty(session, app):
     with app.test_client() as test_client:
@@ -17,7 +17,7 @@ def test_search_plate_get_request_success_empty(session, app):
         session.add(expected_plate)
         session.commit()
         response = test_client.get("/search-plate?key={}&levenshtein=1".format(search_key))
-        assert eval(response.data) == {search_key: []}
+        assert eval(response.data) == []
 
 def test_search_plate_get_request_malformed_request(app):
     with app.test_client() as test_client:
