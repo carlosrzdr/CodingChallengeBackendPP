@@ -32,6 +32,8 @@ def plate():
             plate = Plate(plate_number=plate_number)
             plate.save()
             return SUCCESS_200
+        elif plate_number=='':
+            abort(400)
         else:
             abort(422)
 

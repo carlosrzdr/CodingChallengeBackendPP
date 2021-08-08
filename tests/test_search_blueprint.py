@@ -21,10 +21,19 @@ def test_search_plate_get_request_success_empty(session, app):
 
 def test_search_plate_get_request_malformed_request(app):
     with app.test_client() as test_client:
-        response = test_client.get("/search-plate?key=&levenshtein=")
-        assert response.status_code == 400
+        all_fields_empty_response = test_client.get("/search-plate?key=&levenshtein=")
+        key_field_empty_response = test_client.get("/search-plate?key=&levenshtein=")
+        levenshtein_field_empty_response = test_client.get("/search-plate?key=&levenshtein=")
+        assert all_fields_empty_response.status_code == 400
+        assert key_field_empty_response.status_code == 400
+        assert levenshtein_field_empty_response.status_code == 400
 
 def test_search_plate_get_request_malformed_plate(app):
     with app.test_client() as test_client:
         response = test_client.get("/search-plate?key=ABC123&levenshtein=1")
         assert response.status_code == 422
+
+def test_search_page_found(app):
+    with app.test_client() as test_client:
+        response = test_client.get('/search')
+        assert response.status_code == 200
