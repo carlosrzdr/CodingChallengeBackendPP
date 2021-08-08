@@ -17,7 +17,7 @@ cd CodingChallengeBackendPP
 
 ### Build container image 🔧
 
-_Execute the following command to build the image. The name given to the image is flask-app_
+_Execute the following command to build the image. The name given to the image is flask-app-container_
 
 ```
 docker image build -t flask-app .
